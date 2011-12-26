@@ -3,7 +3,10 @@ package uk.chrismay.springtest.domain;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.util.Calendar;
 import java.util.Date;
+
+import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -21,8 +24,18 @@ public class RideTest {
 		
 		assertEquals(r, ride.getRoute());
 		assertFalse(beforeConstructor.after(ride.getDate()));
-		assertFalse(afterConstructor.before(ride.getDate()));
-		
+		assertFalse(afterConstructor.before(ride.getDate()));		
+	}
+	
+	@Test
+	public void canSetDate(){
+		Route r = new Route("test");
+		Ride ride = new Ride(r);
+		Calendar cal = Calendar.getInstance();
+		cal.set(1999,12,31);
+		Date longAgo = cal.getTime(); 		
+		ride.setDate(longAgo);
+		Assert.assertEquals(longAgo, ride.getDate());
 	}
 	
 }

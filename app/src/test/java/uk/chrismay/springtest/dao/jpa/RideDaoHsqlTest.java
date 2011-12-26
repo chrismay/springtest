@@ -42,6 +42,16 @@ public class RideDaoHsqlTest extends
 		assertEquals(r2.getId(), saved.getId());
 		assertEquals("test", r2.getComments());
 	}
+	
+	@Test
+	public void testSaveSetsId(){
+		Route route = new Route("not used elsewhere");
+		Ride r = new Ride(route);
+		Ride saved = rideDao.save(r);
+		assertTrue(saved.getId() > 0);
+		assertTrue(saved.getRoute().getId() > 0);	
+	}
+	
 
 	@Test
 	public void persistRoutes() {
