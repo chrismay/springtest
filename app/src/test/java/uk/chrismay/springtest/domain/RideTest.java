@@ -38,4 +38,14 @@ public class RideTest {
 		Assert.assertEquals(longAgo, ride.getDate());
 	}
 	
+	@Test
+	public void canSetRoute(){
+		Route r = new Route("test");
+		Ride ride = new Ride(r);
+		Route r2 = new Route("new route");
+		ride.setRoute(r2);
+		Assert.assertEquals(r2, ride.getRoute());
+	}
+	
+	
 }
