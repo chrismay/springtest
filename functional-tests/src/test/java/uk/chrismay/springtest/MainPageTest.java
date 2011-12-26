@@ -9,7 +9,12 @@ public class MainPageTest {
 	@Test
 	public void canViewMainPage(){
 		Given().theApplication().isRunning();
-		When().theApplication().mainPage().shouldLoad();
-		
+		Then().theApplication().mainPage().shouldLoad();		
+	}
+	
+	@Test
+	public void mainPageHasLinkToCreateRoutes(){
+		Given().theApplication().isRunning();
+		Then().theApplication().mainPage().shouldContainLink().WithText("Create Route");
 	}
 }

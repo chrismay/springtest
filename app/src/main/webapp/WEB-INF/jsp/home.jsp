@@ -1,4 +1,6 @@
 <html><body>
 <H1>Welcome</H1>
-Home
+<ul>
+<li><a href="route/new.htm">Create Route</a></li>
+</ul>
 </body></html>
