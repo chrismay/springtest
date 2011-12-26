@@ -30,25 +30,13 @@
         <version>2.5.1</version>
         <configuration>
           <check>
-            <branchRate>85</branchRate>
-            <lineRate>85</lineRate>
+            <branchRate>95</branchRate>
+            <lineRate>95</lineRate>
             <haltOnFailure>true</haltOnFailure>
-            <totalBranchRate>85</totalBranchRate>
-            <totalLineRate>85</totalLineRate>
-            <packageLineRate>85</packageLineRate>
-            <packageBranchRate>85</packageBranchRate>
-            <regexes>
-              <regex>
-                <pattern>com.example.reallyimportant.*</pattern>
-                <branchRate>90</branchRate>
-                <lineRate>80</lineRate>
-              </regex>
-              <regex>
-                <pattern>com.example.boringcode.*</pattern>
-                <branchRate>40</branchRate>
-                <lineRate>30</lineRate>
-              </regex>
-            </regexes>
+            <totalBranchRate>95</totalBranchRate>
+            <totalLineRate>95</totalLineRate>
+            <packageLineRate>95</packageLineRate>
+            <packageBranchRate>95</packageBranchRate>
           </check>
         </configuration>
         <executions>

@@ -59,12 +59,26 @@
 						<log>${project.build.directory}/logs/${container.name}.log</log>
 						<output>${project.build.directory}/logs/${container.name}.out</output>
 						<timeout>600000</timeout>
+						<dependencies>
+							<dependency>
+								<groupId>org.hsqldb</groupId>
+								<artifactId>hsqldb</artifactId>
+							</dependency>
+						</dependencies>
 					</container>
 					<configuration>
-					 <properties>
--                       <cargo.servlet.port>${servlet.port}</cargo.servlet.port>
--                    </properties>
-					
+						<properties>							
+						<cargo.datasource.datasource>
+							cargo.datasource.driver=org.hsqldb.jdbcDriver|
+							cargo.datasource.url=jdbc:hsqldb:mem:testdb|
+							cargo.datasource.jndi=jdbc/RidesDS|
+							cargo.datasource.username=sa|
+							cargo.datasource.password=|
+						</cargo.datasource.datasource>							
+							<cargo.servlet.port>${servlet.port}</cargo.servlet.port>
+							
+						</properties>
+
 						<deployables>
 							<!-- application to deploy -->
 							<deployable>
@@ -87,10 +101,10 @@
 					<!-- Skip the normal tests, we'll run them in the integration-test phase -->
 					<skip>true</skip>
 					<systemProperties>
-					<property>
-						<name>servlet.port</name>
-						<value>${servlet.port}</value>
-					</property>
+						<property>
+							<name>servlet.port</name>
+							<value>${servlet.port}</value>
+						</property>
 					</systemProperties>
 				</configuration>
 				<executions>
@@ -134,5 +148,11 @@
 			<version>1.6R5</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
 	</dependencies>
 </project>
