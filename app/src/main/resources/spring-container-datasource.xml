@@ -8,4 +8,9 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
 ">
 <jee:jndi-lookup id="datasource" jndi-name="jdbc/RidesDS"/>
+   <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="database" value="MYSQL"/>
+        <property name="showSql" value="true" />
+        <property name="generateDdl" value="true" />
+    </bean>
 </beans>

@@ -17,14 +17,16 @@ public class MainPageTest {
 	@Test
 	public void mainPageHasLinkToCreateRoutes(){
 		Given().theApplication().isRunning();
-		Then().theApplication().mainPage().should().containLink().WithText(CREATE_ROUTE_LINK);
+		When().theUser().viewsMainPage();
+		Then().theCurrentPage().shouldBe().mainPage();
+		And().theMainPage().containLink().WithText(CREATE_ROUTE_LINK);
 	}
 	
 	@Test
 	public void canLoadCreateRoutesPageFromMainPage(){
 		Given().theApplication().isRunning();
 		When().theUser().viewsMainPage().and().clicksCreateRoutesLink();
-		Then().theRoutesPage().should().beLoaded();
+		Then().theCurrentPage().shouldBe().routesPage();
 	}
 
 	

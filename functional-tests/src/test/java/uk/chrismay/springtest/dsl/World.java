@@ -1,7 +1,5 @@
 package uk.chrismay.springtest.dsl;
 
-import uk.chrismay.springtest.dsl.http.WebConversationWrapper;
-
 import com.meterware.httpunit.WebResponse;
 
 public class World {
@@ -28,6 +26,9 @@ public class World {
 	public App theUser() {
 		return _app;
 	}
+	public PageMatcher theCurrentPage(){
+		return Session.current().currentPage();
+	}
 	
 	public RoutesPage theRoutesPage() {
 		if (_routesPage == null){
@@ -36,10 +37,13 @@ public class World {
 		return _routesPage; 
 	}
 	public static RoutesPage loadRoutesPage(
-			WebConversationWrapper conversation, WebResponse page) {
+			Session session, WebResponse page) {
 		// TODO Auto-generated method stub
-		_world._routesPage = new RoutesPage(conversation, page);
+		_world._routesPage = new RoutesPage(session, page);
 		return _world._routesPage;
+	}
+	public MainPage theMainPage() {
+		return Session.current().MainPage();
 	}
 	
 	

@@ -1,22 +1,19 @@
 package uk.chrismay.springtest.dsl;
 
-import java.io.IOException;
+import junit.framework.Assert;
 
 import org.xml.sax.SAXException;
-
-import junit.framework.Assert;
-import uk.chrismay.springtest.dsl.http.WebConversationWrapper;
 
 import com.meterware.httpunit.WebForm;
 import com.meterware.httpunit.WebResponse;
 
 public class RoutesPage {
 	
-	private WebConversationWrapper conversation;
+	private Session session;
 	private WebResponse thePage;
 
-	public RoutesPage(WebConversationWrapper conversation, WebResponse thePage){
-		this.conversation = conversation;
+	public RoutesPage(Session session, WebResponse thePage){
+		this.session= session;
 		this.thePage = thePage;		
 	}
 
@@ -36,12 +33,10 @@ public class RoutesPage {
 		try {
 			WebForm createForm = thePage.getFormWithID("createroute");
 			createForm.setParameter("routename", name);
-			WebResponse resp = createForm.submit();
+			WebResponse resp = session.submitForm(createForm);
 			Assert.assertNotNull(resp);
 			
 		} catch (SAXException e) {
-			throw new RuntimeException();
-		} catch (IOException e) {
 			throw new RuntimeException();
 		}
 	}

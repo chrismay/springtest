@@ -23,32 +23,32 @@
 
 	</properties>
 	<build>
-	 <plugins>
-	     <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>cobertura-maven-plugin</artifactId>
-        <version>2.5.1</version>
-        <configuration>
-          <check>
-            <branchRate>95</branchRate>
-            <lineRate>95</lineRate>
-            <haltOnFailure>true</haltOnFailure>
-            <totalBranchRate>95</totalBranchRate>
-            <totalLineRate>95</totalLineRate>
-            <packageLineRate>95</packageLineRate>
-            <packageBranchRate>95</packageBranchRate>
-          </check>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>clean</goal>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-	 </plugins>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<check>
+						<branchRate>95</branchRate>
+						<lineRate>95</lineRate>
+						<haltOnFailure>true</haltOnFailure>
+						<totalBranchRate>95</totalBranchRate>
+						<totalLineRate>95</totalLineRate>
+						<packageLineRate>95</packageLineRate>
+						<packageBranchRate>95</packageBranchRate>
+					</check>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>clean</goal>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -80,10 +80,11 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.18</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.hsqldb</groupId>
@@ -95,6 +96,11 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${org.hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
 		</dependency>
 
 		<dependency>
@@ -226,11 +232,11 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-    <dependency>
-  <groupId>org.mockito</groupId>
-    <artifactId>mockito-all</artifactId>
-      <version>1.9.0</version>
-        <scope>test</scope>
-      </dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

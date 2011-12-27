@@ -61,22 +61,22 @@
 						<timeout>600000</timeout>
 						<dependencies>
 							<dependency>
-								<groupId>org.hsqldb</groupId>
-								<artifactId>hsqldb</artifactId>
+								<groupId>mysql</groupId>
+								<artifactId>mysql-connector-java</artifactId>
 							</dependency>
 						</dependencies>
 					</container>
 					<configuration>
-						<properties>							
-						<cargo.datasource.datasource>
-							cargo.datasource.driver=org.hsqldb.jdbcDriver|
-							cargo.datasource.url=jdbc:hsqldb:mem:testdb|
-							cargo.datasource.jndi=jdbc/RidesDS|
-							cargo.datasource.username=sa|
-							cargo.datasource.password=|
-						</cargo.datasource.datasource>							
+						<properties>
+							<cargo.datasource.datasource>
+								cargo.datasource.driver= com.mysql.jdbc.Driver|
+								cargo.datasource.url=jdbc:mysql://localhost:3306/rides_test|
+								cargo.datasource.jndi=jdbc/RidesDS|
+								cargo.datasource.username=rides_test|
+								cargo.datasource.password=|
+							</cargo.datasource.datasource>
 							<cargo.servlet.port>${servlet.port}</cargo.servlet.port>
-							
+
 						</properties>
 
 						<deployables>
@@ -149,10 +149,11 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>2.0.0</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.18</version>
 		</dependency>
+
 
 	</dependencies>
 </project>

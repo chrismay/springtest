@@ -11,5 +11,6 @@ public class RoutesTest {
 		Given().theApplication().isRunning();
 		When().theUser().loadsRoutesPage();
 		And().theUser().createsRoute("test route");
+		Then().theCurrentPage().shouldBe().routeCreatedPage();
 	}
 }

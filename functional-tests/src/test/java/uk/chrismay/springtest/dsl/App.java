@@ -2,9 +2,6 @@ package uk.chrismay.springtest.dsl;
 
 import java.io.IOException;
 
-import uk.chrismay.springtest.dsl.http.WebConversationWrapper;
-
-import com.meterware.httpunit.WebConversation;
 import com.meterware.httpunit.WebResponse;
 
 public class App {
@@ -15,14 +12,13 @@ public class App {
 	private static final String APP_BASE_URL = SERVER_URL + CONTEXT;
 	public static final String STATUS_URL = APP_BASE_URL + "/status.htm";
 	public static final String HOME_URL = APP_BASE_URL + "/home.htm";
-	
-	private final WebConversationWrapper conversation;
+	private final Session session;
 	
 	private MainPage mainPage;
 	private RoutesPage routesPage;
 	
 	public App() {
-		conversation = new WebConversationWrapper(new WebConversation());
+		session = Session.current();
 	}
 
 	public App isRunning() {
@@ -30,7 +26,7 @@ public class App {
 
 			@Override
 			public boolean run() {
-				WebResponse res = conversation
+				WebResponse res = session
 						.getResponse(STATUS_URL);
 				try {
 					return (res.getText().startsWith("\nok"));
@@ -46,7 +42,7 @@ public class App {
 
 	private MainPage loadMainPage(){
 		if (mainPage == null){
-			mainPage = new MainPage(conversation);
+			mainPage = new MainPage(session);
 		}
 		return mainPage;
 	}
@@ -55,7 +51,7 @@ public class App {
 	}
 
 	public MainPage viewsMainPage() {
-		return loadMainPage();
+		return new MainPage(session);
 	}
 
 	public RoutesPage loadsRoutesPage() {

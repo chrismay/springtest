@@ -26,7 +26,7 @@ public class RideServiceTest {
 	private final Ride r2 = new Ride(testRoute);
 	private final RideDao rideDao = mock(RideDao.class);
 	private final RouteDao routeDao = mock(RouteDao.class);
-	private final RideService service = new RideService(rideDao, routeDao);
+	private final RideService service = new RideServiceImpl(rideDao, routeDao);
 
 	@Test
 	public void createRideUsesSuppliedRoute(){

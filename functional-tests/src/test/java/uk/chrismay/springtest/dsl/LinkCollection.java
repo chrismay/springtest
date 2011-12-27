@@ -1,15 +1,11 @@
 package uk.chrismay.springtest.dsl;
 
-import java.io.IOException;
+import static com.google.common.collect.Collections2.filter;
+
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.xml.sax.SAXException;
-
-import uk.chrismay.springtest.dsl.http.WebConversationWrapper;
-
 import junit.framework.Assert;
-import static com.google.common.collect.Collections2.*;
 
 import com.google.common.base.Predicate;
 import com.meterware.httpunit.WebLink;
@@ -40,16 +36,9 @@ public class LinkCollection {
 		return matching;
 	}
 
-	public WebResponse clickLink(String linkText,
-			WebConversationWrapper conversation) {
+	public WebResponse clickLink(String linkText, Session session) {
 		WebLink link = findLinksWithText(linkText).iterator().next();
-		try {
-			return link.click();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} catch (SAXException e) {
-			throw new RuntimeException(e);
-		}
+		return session.click(link);
 
 	}
 

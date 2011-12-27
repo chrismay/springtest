@@ -12,6 +12,9 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 ">
 
     <import resource="spring-container-datasource.xml"/>
+    <import resource="spring-persistence.xml"/>
+    <import resource="spring-services.xml"/>
+
     <mvc:annotation-driven />
     <context:component-scan base-package="uk.chrismay.springtest.web.controller"/>
      
