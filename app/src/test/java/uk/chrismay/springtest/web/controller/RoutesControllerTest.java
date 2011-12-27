@@ -1,14 +1,19 @@
 package uk.chrismay.springtest.web.controller;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import uk.chrismay.springtest.domain.Route;
 import uk.chrismay.springtest.service.RideService;
-import static org.mockito.Mockito.*;
 
 public class RoutesControllerTest {;
 
@@ -27,16 +32,31 @@ public class RoutesControllerTest {;
 	public void testSubmitNewRouteForm() {
 		final String testRouteName = "test route";
 		Route route = new Route(testRouteName);
+		route.setId(99);
 		
-		when(rs.createRoute(testRouteName)).thenReturn(route);
-		
+		when(rs.createRoute(testRouteName)).thenReturn(route.getId());
+		when(rs.getRoute(route.getId())).thenReturn(route);
 		RoutesController controller = new RoutesController(rs);
 
-		ModelAndView mav = controller.submitRouteForm(route);
+		ModelAndView mav = controller.submitRouteForm(route, new BindException(route,"route"));
 		
 		assertEquals("route_created", mav.getViewName());	
 		assertNotNull(mav.getModelMap().get("route"));
 		assertEquals(testRouteName, ((Route)mav.getModelMap().get("route")).getName());
+	}
+	
+	@Test
+	public void testSubmitDuplicateNamedRoute(){
+		final String testRouteName = "test route";		
+		Route route = new Route(testRouteName);
+
+		when(rs.createRoute(testRouteName)).thenReturn(RideService.NON_EXISTENT_ENTITY_ID);
+		RoutesController controller = new RoutesController(rs);
+		BindingResult errors = new BindException(route,"route");
+		ModelAndView mav = controller.submitRouteForm(route, errors);
+		assertEquals("new_route", mav.getViewName());
+		assertEquals(1,errors.getAllErrors().size());
+		assertEquals("Route with name test route already exists",errors.getFieldError("name").getDefaultMessage());
 	}
 
 }

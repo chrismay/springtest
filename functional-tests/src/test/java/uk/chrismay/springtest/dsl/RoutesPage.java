@@ -31,8 +31,8 @@ public class RoutesPage {
 
 	public void createRoute(String name) {
 		try {
-			WebForm createForm = thePage.getFormWithID("createroute");
-			createForm.setParameter("routename", name);
+			WebForm createForm = thePage.getFormWithID("route");
+			createForm.setParameter("name", name);
 			WebResponse resp = session.submitForm(createForm);
 			Assert.assertNotNull(resp);
 			

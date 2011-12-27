@@ -10,6 +10,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Route {
 
+	public static final String QUERY_FIND_BY_NAME = "from Route r where r.name=?";
+
 	public Route(String name){
 		this.name = name;
 	}
@@ -24,7 +26,7 @@ public class Route {
 		return id;
 	}
 	
-	@Column
+	@Column(unique = true)
     @NotBlank
 	private String name;
 
@@ -33,6 +35,9 @@ public class Route {
 	}
 	public void setName(String name){
 		this.name = name;
+	}
+	public void setId(long i) {
+		this.id = i;
 	}
 
 	

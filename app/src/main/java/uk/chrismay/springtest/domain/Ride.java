@@ -18,9 +18,9 @@ public class Ride {
 
 	public Ride(Route route){
 		this.date = new Date(new java.util.Date().getTime());
-		this.route = route;
-		
+		this.route = route;	
 	}
+	
 	@Id
 	@GeneratedValue
 	private long id;
@@ -28,6 +28,11 @@ public class Ride {
 	public long getId(){
 		return id;
 	}
+	
+	public void setId(long id){
+		this.id = id;
+	}
+
 	@Column 
 	private Date date;
 	

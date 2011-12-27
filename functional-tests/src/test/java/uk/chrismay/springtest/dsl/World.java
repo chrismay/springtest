@@ -45,6 +45,10 @@ public class World {
 	public MainPage theMainPage() {
 		return Session.current().MainPage();
 	}
+	public Database theDatabase() {
+		// TODO Auto-generated method stub
+		return new Database();
+	}
 	
 	
 

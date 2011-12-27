@@ -24,9 +24,9 @@ public class RideServiceImpl implements RideService {
 	}
     
 	@Transactional
-	public Ride createRide(Route route){
+	public long createRide(Route route){
 		Ride r = new Ride(route);
-		return rideDao.save(r);
+		return rideDao.save(r).getId();
 	}
 	
 
@@ -36,9 +36,24 @@ public class RideServiceImpl implements RideService {
 	}
 	
 	@Transactional
-	public Route createRoute(String name){
-		Route r = new Route(name);
-		return routeDao.save(r);
+	public long createRoute(String name){
+		Collection<Route> preExisting = routeDao.findByName(name);
+		if (preExisting.isEmpty()){
+			Route r = new Route(name);
+			return routeDao.save(r).getId();
+		}else{
+			return NON_EXISTENT_ENTITY_ID;
+		}
+	}
+
+	@Transactional
+	public Ride getRide(long id) {
+		return rideDao.findById(id);
+	}
+
+	@Transactional
+	public Route getRoute(long id) {
+		return routeDao.findById(id);
 	}
 	
 }

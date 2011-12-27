@@ -38,7 +38,7 @@ public class PageMatcher {
 	}
 
 	public void routesPage() {
-		Assert.assertTrue(pageText().contains("Add Route"));
+		Assert.assertTrue("Page doesn't look like the 'Add Route' page",pageText().contains("Add Route"));
 	}
 
 	public void routeCreatedPage() {

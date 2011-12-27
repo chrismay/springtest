@@ -13,4 +13,14 @@ public class RoutesTest {
 		And().theUser().createsRoute("test route");
 		Then().theCurrentPage().shouldBe().routeCreatedPage();
 	}
+	
+	@Test
+	public void cantCreateRoutesWithDuplicateNames(){
+		Given().theApplication().isRunning();
+		And().theDatabase().isEmptied();
+		When().theUser().loadsRoutesPage();
+		And().theUser().createsRoute("test route");
+		And().theUser().loadsRoutesPage();
+		Then().theCurrentPage().shouldBe().routesPage();
+	}
 }

@@ -6,6 +6,8 @@ import static org.mockito.Mockito.verify;
 import java.util.Collection;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import static junit.framework.Assert.*;
 
 import org.junit.Test;
@@ -27,24 +29,34 @@ public class RideServiceTest {
 	private final RideDao rideDao = mock(RideDao.class);
 	private final RouteDao routeDao = mock(RouteDao.class);
 	private final RideService service = new RideServiceImpl(rideDao, routeDao);
+	
 
 	@Test
 	public void createRideUsesSuppliedRoute(){
 
+		r2.setId(99);
 		when(rideDao.save(argThat(isRideWithTestRoute()))).thenReturn(r2);
-		Ride newRide = service.createRide(testRoute);
-		assertEquals(r2, newRide);
+		long id = service.createRide(testRoute);
+		assertEquals(r2.getId(), id);
 		verify(rideDao).save(argThat(isRideWithTestRoute()));
 	}
 	
 	@Test
 	public void createRouteUsesSuppliedName(){
 		Route r = new Route("test");
+		r.setId(22);
 		when(routeDao.save(argThat(isTestRoute()))).thenReturn(r);
-		Route newRoute = service.createRoute("test");
-		assertEquals(r, newRoute);
+		long newRouteId = service.createRoute("test");
+		assertEquals(r.getId(), newRouteId);
 	}
-
+	
+	@Test
+	public void cantCreateDuplicateNamedRoutes(){
+		Route r = new Route("test");
+		when(routeDao.findByName("test")).thenReturn(ImmutableList.of(r));
+		long id = service.createRoute("test");
+		Assert.assertEquals(RideService.NON_EXISTENT_ENTITY_ID, id);
+	}	
 	
 	@Test
 	public void getAllGetsAll(){
@@ -56,6 +68,37 @@ public class RideServiceTest {
 		assertTrue(all.contains(r));
 		assertTrue(all.contains(r2));
 	}
+	
+	@Test
+	public void getRideThatExists(){
+		r2.setId(99);
+		when(rideDao.findById(r2.getId())).thenReturn(r2);
+		Ride found = service.getRide(r2.getId());
+		assertEquals(r2,found);
+	}
+	
+	@Test
+	public void getRideThatDoesNotExist(){
+		when(rideDao.findById(99)).thenReturn(null);
+		Ride notFound = service.getRide(99);
+		assertNull(notFound);
+	}
+	
+	@Test
+	public void getRouteThatExists(){
+		testRoute.setId(99);
+		when(routeDao.findById(testRoute.getId())).thenReturn(testRoute);
+		Route found = service.getRoute(testRoute.getId());
+		assertEquals(testRoute,found);
+	}
+	
+	@Test
+	public void getRouteThatDoesNotExist(){
+		when(routeDao.findById(99)).thenReturn(null);
+		Route notFound = service.getRoute(99);
+		assertNull(notFound);
+	}
+	
 	
 	private IsRideWithTestRoute isRideWithTestRoute() {
 		return new IsRideWithTestRoute();

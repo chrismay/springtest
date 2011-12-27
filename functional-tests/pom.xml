@@ -17,6 +17,9 @@
 		<container.name>tomcat6x</container.name>
 		<container.url>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35.zip</container.url>
 		<servlet.port>8123</servlet.port>
+		<test.datasource.driver>com.mysql.jdbc.Driver</test.datasource.driver>
+		<test.datasource.url>jdbc:mysql://localhost:3306/rides_test</test.datasource.url>
+		<test.datasource.username>rides_test</test.datasource.username>
 	</properties>
 
 
@@ -69,10 +72,10 @@
 					<configuration>
 						<properties>
 							<cargo.datasource.datasource>
-								cargo.datasource.driver= com.mysql.jdbc.Driver|
-								cargo.datasource.url=jdbc:mysql://localhost:3306/rides_test|
+								cargo.datasource.driver= ${test.datasource.driver}|
+								cargo.datasource.url=${test.datasource.url}|
 								cargo.datasource.jndi=jdbc/RidesDS|
-								cargo.datasource.username=rides_test|
+								cargo.datasource.username=${test.datasource.username}|
 								cargo.datasource.password=|
 							</cargo.datasource.datasource>
 							<cargo.servlet.port>${servlet.port}</cargo.servlet.port>

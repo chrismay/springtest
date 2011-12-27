@@ -9,13 +9,21 @@ import uk.chrismay.springtest.domain.Route;
 
 public interface RideService {
 
-	@Transactional
-	public abstract Ride createRide(Route route);
+	public final static long NON_EXISTENT_ENTITY_ID=-1;
 
 	@Transactional
-	public abstract Collection<Ride> getAllRides();
-
+	public long createRide(Route route);
+	
 	@Transactional
-	public abstract Route createRoute(String name);
+	public long createRoute(String name);
 
+	@Transactional(readOnly=true)
+	public Collection<Ride> getAllRides();
+
+	@Transactional(readOnly=true)
+	public Ride getRide(long id);
+	
+	@Transactional(readOnly=true)
+	public Route getRoute(long id);
+	
 }
