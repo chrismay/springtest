@@ -38,7 +38,7 @@ public class PageMatcher {
 	}
 
 	public void routesPage() {
-		Assert.assertTrue(pageText().contains("<form id=\"createroute\""));
+		Assert.assertTrue(pageText().contains("Add Route"));
 	}
 
 	public void routeCreatedPage() {

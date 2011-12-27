@@ -1,8 +1,10 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html><body>
 <H1>Add Route</H1>
-<form id="createroute" method="POST">
-Name:<input type="text" name="routename" type="text"/>
+<form:form commandName="route" >
+Name:<form:input type="text" path="name"/>
 <p/>
 <input type="submit"/>
-</form >
+</form:form >
 </body></html>

@@ -18,7 +18,9 @@ public class RoutesControllerTest {;
 	public void testNewRouteForm() {
 		RoutesController controller = new RoutesController(rs);
 		ModelAndView mav = controller.newRouteForm();
-		assertEquals("new_route", mav.getViewName());	
+		assertEquals("new_route", mav.getViewName());
+		assertNotNull(mav.getModelMap().get("route"));
+		assertTrue(mav.getModelMap().get("route") instanceof Route);
 	}
 
 	@Test

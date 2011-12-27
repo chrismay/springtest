@@ -18,6 +18,12 @@ public class RouteTest extends AbstractJUnit4SpringContextTests{
 	private Validator validator;
 	
 	@Test
+	public void testCanSetName(){
+		Route r = new Route();
+		r.setName("blah");
+		assertEquals("blah", r.getName());
+	}
+	@Test
 	public void testValidationOfNullName(){
 		Route nullName = new Route(null);
 		Errors errors = new DirectFieldBindingResult(nullName, "null route");

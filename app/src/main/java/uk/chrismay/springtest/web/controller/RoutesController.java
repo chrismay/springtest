@@ -23,7 +23,7 @@ public class RoutesController {
 	}
 	@RequestMapping(value="/new", method=RequestMethod.GET)
 	public ModelAndView newRouteForm(){
-		return new ModelAndView("new_route");
+		return new ModelAndView("new_route", "route", new Route());
 	}
 	
 	@RequestMapping(value="/new", method=RequestMethod.POST)
