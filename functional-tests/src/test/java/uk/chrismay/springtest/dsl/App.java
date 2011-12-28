@@ -2,10 +2,13 @@ package uk.chrismay.springtest.dsl;
 
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
+
 import com.meterware.httpunit.WebResponse;
 
 public class App {
 
+	private static final Logger LOG = Logger.getLogger(App.class);
 	private static final String SERVLET_PORT=System.getProperty("servlet.port","8080");
 	private static final String SERVER_URL = "http://localhost:" + SERVLET_PORT + "/";
 	private static final String CONTEXT="springtest";
@@ -16,6 +19,7 @@ public class App {
 	
 	
 	public App() {
+		LOG.info(String.format("Creating app with URL base %s ", APP_BASE_URL));
 		session = Session.current();
 	}
 
@@ -49,11 +53,14 @@ public class App {
 		return new MainPage(session);
 	}
 
-	public RoutesPage loadsRoutesPage() {
+	public RoutesList loadsShowRoutesPage(){
+		return loadMainPage().clicksShowRoutesLink();
+	}
+	public RoutesPage loadsCreateNewRoutePage() {
 			return loadMainPage().clicksCreateRoutesLink();			
 	}
 
 	public void createsRoute(String name) {
-		 loadsRoutesPage().createRoute(name);
+		 loadsCreateNewRoutePage().createRoute(name);
 	}
 }

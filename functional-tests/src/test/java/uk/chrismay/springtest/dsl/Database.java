@@ -17,9 +17,10 @@ public class Database {
 	public Database(){
 		String driverName = System.getProperty("test.datasource.driver", "com.mysql.jdbc.Driver");
 		dbUrl = System.getProperty("test.datasource.url","jdbc:mysql://localhost:3306/rides");
-		dbUser= System.getProperty("test.datasource.user","rides");
+		dbUser= System.getProperty("test.datasource.username","rides");
 		dbPassword = System.getProperty("test.datasource.password","");
 	   try {
+		LOG.info(String.format("Creating Database abstraction for %s",dbUrl));
 		Class.forName(driverName);
 	} catch (ClassNotFoundException e) {
 		throw new RuntimeException(e);

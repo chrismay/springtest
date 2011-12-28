@@ -107,12 +107,18 @@
 						<property>
 							<name>servlet.port</name>
 							<value>${servlet.port}</value>
+					    </property>
+					    <property>
 							<name>test.datasource.driver</name>
-							<value>${test.datsource.driver}</value>
+							<value>${test.datasource.driver}</value>
+					    </property>
+					    <property>
 							<name>test.datasource.url</name>
-							<value>${test.datsource.url}</value>
+							<value>${test.datasource.url}</value>
+					    </property>
+					    <property>
 							<name>test.datasource.username</name>
-							<value>${test.datsource.username}</value>
+							<value>${test.datasource.username}</value>
 						</property>
 					</systemProperties>
 				</configuration>

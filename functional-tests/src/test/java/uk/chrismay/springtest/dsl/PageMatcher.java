@@ -55,11 +55,14 @@ public class PageMatcher {
 	}
 
 	public void containText(String text) {
-		try {
-			Assert.assertTrue("Couldn't find '" + text + "' in the text:\n"+ page.getText(), page
-					.getText().contains(text));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+			Assert.assertTrue("Couldn't find '" + text + "' in the text:\n"+ pageText(), pageText().contains(text));
+	}
+
+	public void hasRoutesList() {
+		Assert.assertTrue("Page doesn't seem to contain the Routes List\n:" + pageText(), pageText().contains("ul id='routeList'"));
+	}
+
+	public String getUrl() {
+		return page.getURL().toExternalForm();
 	}
 }

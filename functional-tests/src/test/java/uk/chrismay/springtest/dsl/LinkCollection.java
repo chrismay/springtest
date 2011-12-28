@@ -4,6 +4,7 @@ import static com.google.common.collect.Collections2.filter;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 
 import junit.framework.Assert;
 
@@ -37,9 +38,13 @@ public class LinkCollection {
 	}
 
 	public WebResponse clickLink(String linkText, Session session) {
-		WebLink link = findLinksWithText(linkText).iterator().next();
-		return session.click(link);
-
+		Iterator<WebLink> matchingLinks = findLinksWithText(linkText).iterator();
+		if (matchingLinks.hasNext()){
+			return session.click(matchingLinks.next());
+		}else{
+			Assert.fail(String.format("Can't find a link with text '%s' on page at %s",linkText, session.currentPage().getUrl()));
+			return null;
+		}
 	}
 
 }

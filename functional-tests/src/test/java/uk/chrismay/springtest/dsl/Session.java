@@ -78,4 +78,9 @@ public class Session {
 		return new MainPage(this,history.getLast());
 	}
 
+	public RoutesList RoutesList() {
+		return new RoutesList(this, history.getLast());
+		
+	}
+
 }

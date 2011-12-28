@@ -45,7 +45,7 @@ public class MainPage {
 		return this;
 	}
 	public RoutesPage clicksCreateRoutesLink(){
-		return World.loadRoutesPage(session, clicksLink("Create Route"));
+		return new RoutesPage(session, clicksLink("Create Route"));
 	}
 	public WebResponse clicksLink(String linkText) {
 		LinkCollection links = getLinkCollection();
@@ -53,5 +53,9 @@ public class MainPage {
 	}
 	public MainPage should() {
 		return this;
+	}
+
+	public RoutesList clicksShowRoutesLink() {
+		return new RoutesList(session, clicksLink("Show Routes"));
 	}
 }
