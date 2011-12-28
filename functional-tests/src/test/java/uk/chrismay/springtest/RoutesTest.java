@@ -9,6 +9,7 @@ public class RoutesTest {
 	@Test
 	public void canCreateRoute(){
 		Given().theApplication().isRunning();
+		And().theDatabase().isEmptied();
 		When().theUser().loadsRoutesPage();
 		And().theUser().createsRoute("test route");
 		Then().theCurrentPage().shouldBe().routeCreatedPage();
@@ -21,6 +22,9 @@ public class RoutesTest {
 		When().theUser().loadsRoutesPage();
 		And().theUser().createsRoute("test route");
 		And().theUser().loadsRoutesPage();
+		And().theUser().createsRoute("test route");
 		Then().theCurrentPage().shouldBe().routesPage();
+		And().theCurrentPage().should().containText("Route with name test route already exists");
+		
 	}
 }

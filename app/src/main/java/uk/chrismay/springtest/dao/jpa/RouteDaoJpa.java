@@ -19,7 +19,6 @@ public class RouteDaoJpa  implements RouteDao {
 
 	@Override
 	public Route save(Route r) {
-		
 		entityManager.persist(r);
 		return r;
 	}

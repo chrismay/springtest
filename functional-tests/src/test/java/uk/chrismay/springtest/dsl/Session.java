@@ -3,6 +3,7 @@ package uk.chrismay.springtest.dsl;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
 import com.meterware.httpunit.WebConversation;
@@ -13,6 +14,7 @@ import com.meterware.httpunit.WebResponse;
 public class Session {
 
 	private static Session instance = new Session();
+	private static final Logger LOG = Logger.getLogger(Session.class);
 	private WebConversation conversation = new WebConversation();
 	private LinkedList<WebResponse> history = new LinkedList<WebResponse>();
 
@@ -38,7 +40,7 @@ public class Session {
 	}
 
 	private void addHistory(WebResponse resp) {
-		System.out.println("**Added " + resp.getURL()  +" to history");
+		LOG.info("**Added " + resp.getURL()  +" to history");
 		history.add(resp);
 	}
 

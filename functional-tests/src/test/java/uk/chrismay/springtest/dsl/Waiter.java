@@ -1,10 +1,12 @@
 package uk.chrismay.springtest.dsl;
 
+import org.apache.log4j.Logger;
+
 import junit.framework.Assert;
 
 public class Waiter {
 
-	
+	private static final Logger LOG = Logger.getLogger(Waiter.class);
 	static interface Exec {
 		public boolean run();
 	}
@@ -16,7 +18,7 @@ public class Waiter {
 		boolean pass = exec.run();
 		long endTime = System.currentTimeMillis() + timeout;
 		while ((pass == false) && (System.currentTimeMillis() < endTime)) {
-			System.out.println("Waiting for condition: " + message);
+			LOG.info("Waiting for condition: " + message);
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {

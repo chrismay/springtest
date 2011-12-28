@@ -14,8 +14,6 @@ public class App {
 	public static final String HOME_URL = APP_BASE_URL + "/home.htm";
 	private final Session session;
 	
-	private MainPage mainPage;
-	private RoutesPage routesPage;
 	
 	public App() {
 		session = Session.current();
@@ -41,10 +39,7 @@ public class App {
 	}
 
 	private MainPage loadMainPage(){
-		if (mainPage == null){
-			mainPage = new MainPage(session);
-		}
-		return mainPage;
+			return new MainPage(session);
 	}
 	public MainPage mainPage() {
 		return loadMainPage();
@@ -55,10 +50,7 @@ public class App {
 	}
 
 	public RoutesPage loadsRoutesPage() {
-		if (routesPage == null){
-			routesPage = loadMainPage().clicksCreateRoutesLink();			
-		}
-		return routesPage;
+			return loadMainPage().clicksCreateRoutesLink();			
 	}
 
 	public void createsRoute(String name) {

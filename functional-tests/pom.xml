@@ -107,6 +107,12 @@
 						<property>
 							<name>servlet.port</name>
 							<value>${servlet.port}</value>
+							<name>test.datasource.driver</name>
+							<value>${test.datsource.driver}</value>
+							<name>test.datasource.url</name>
+							<value>${test.datsource.url}</value>
+							<name>test.datasource.username</name>
+							<value>${test.datsource.username}</value>
 						</property>
 					</systemProperties>
 				</configuration>
@@ -142,7 +148,7 @@
 		<dependency>
 			<groupId>httpunit</groupId>
 			<artifactId>httpunit</artifactId>
-			<version>1.7</version>
+			<version>1.6</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
