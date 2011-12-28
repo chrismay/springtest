@@ -7,10 +7,14 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.Collection;
+
 import org.junit.Test;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.common.collect.ImmutableList;
 
 import uk.chrismay.springtest.domain.Route;
 import uk.chrismay.springtest.service.RideService;
@@ -19,6 +23,18 @@ public class RoutesControllerTest {;
 
 	private RideService rs = mock(RideService.class);
 
+	@Test
+	public void testListRoutes(){
+		when(rs.getAllRoutes()).thenReturn(ImmutableList.of(new Route("test1"), new Route("test2")));
+		RoutesController controller = new RoutesController(rs);
+		ModelAndView mav = controller.listRoutes();
+		assertEquals("list_routes", mav.getViewName());
+		assertNotNull(mav.getModelMap().get("routes"));
+		@SuppressWarnings("unchecked")
+		Collection<Route> routes = (Collection<Route>) mav.getModelMap().get("routes");
+		assertEquals(2, routes.size());
+		
+	}
 	@Test
 	public void testNewRouteForm() {
 		RoutesController controller = new RoutesController(rs);

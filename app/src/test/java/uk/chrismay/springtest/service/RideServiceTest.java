@@ -70,6 +70,15 @@ public class RideServiceTest {
 	}
 	
 	@Test
+	public void getAllRoutesGetsAll(){
+		List<Route> allRoutes = ImmutableList.of(testRoute);
+		when(routeDao.findAll()).thenReturn(allRoutes);
+		Collection<Route> all = service.getAllRoutes();
+		assertEquals(1, all.size());
+		assertTrue(all.contains(testRoute));
+	}
+	
+	@Test
 	public void getRideThatExists(){
 		r2.setId(99);
 		when(rideDao.findById(r2.getId())).thenReturn(r2);

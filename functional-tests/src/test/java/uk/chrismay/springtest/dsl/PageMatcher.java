@@ -65,4 +65,8 @@ public class PageMatcher {
 	public String getUrl() {
 		return page.getURL().toExternalForm();
 	}
+
+	public void verifyRoutesList() {
+		hasRoutesList();
+	}
 }

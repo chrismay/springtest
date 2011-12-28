@@ -46,4 +46,9 @@ public class RoutesController {
 
 	}
 
+	@RequestMapping(value="/list")
+	public ModelAndView listRoutes() {
+		return new ModelAndView("list_routes","routes",rideService.getAllRoutes());
+	}
+
 }

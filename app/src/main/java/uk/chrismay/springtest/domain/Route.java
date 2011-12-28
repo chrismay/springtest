@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Route {
 
 	public static final String QUERY_FIND_BY_NAME = "from Route r where r.name=?";
+	public static final String QUERY_FIND_ALL = "from Route r";
 
 	public Route(String name){
 		this.name = name;

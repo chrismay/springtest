@@ -9,4 +9,5 @@ public interface RouteDao {
 	Route save(Route r);
 	Collection<Route> findByName(String name);
 	Route findById(long id);
+	Collection<Route> findAll();
 }

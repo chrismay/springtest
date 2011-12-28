@@ -58,5 +58,14 @@ public class RouteDaoJpaTest extends AbstractTransactionalJUnit4SpringContextTes
 		Route r = routeDao.findById(99);
 		assertNull(r);
 	}
+	
+	@Test
+	public void findAll(){
+		assertTrue(routeDao.findAll().isEmpty());
+		routeDao.save(new Route("test1"));
+		routeDao.save(new Route("test2"));
+		Collection<Route> all = routeDao.findAll();
+		assertEquals(2, all.size());
+	}
 
 }

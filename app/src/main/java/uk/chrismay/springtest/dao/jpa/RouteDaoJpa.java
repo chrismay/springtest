@@ -34,6 +34,14 @@ public class RouteDaoJpa  implements RouteDao {
 	public Route findById(long id) {
 		return entityManager.find(Route.class, id);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Route> findAll() {
+		// TODO Auto-generated method stub
+		Query q = entityManager.createQuery(Route.QUERY_FIND_ALL);
+		return q.getResultList();
+	}
 	
 
 }

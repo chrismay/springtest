@@ -16,32 +16,31 @@ public class RideServiceImpl implements RideService {
 
 	private final RideDao rideDao;
 	private final RouteDao routeDao;
-	
+
 	@Autowired
 	public RideServiceImpl(RideDao rideDao, RouteDao routeDao) {
 		this.rideDao = rideDao;
 		this.routeDao = routeDao;
 	}
-    
+
 	@Transactional
-	public long createRide(Route route){
+	public long createRide(Route route) {
 		Ride r = new Ride(route);
 		return rideDao.save(r).getId();
 	}
-	
 
 	@Transactional
-	public Collection<Ride> getAllRides(){
+	public Collection<Ride> getAllRides() {
 		return rideDao.findAll();
 	}
-	
+
 	@Transactional
-	public long createRoute(String name){
+	public long createRoute(String name) {
 		Collection<Route> preExisting = routeDao.findByName(name);
-		if (preExisting.isEmpty()){
+		if (preExisting.isEmpty()) {
 			Route r = new Route(name);
 			return routeDao.save(r).getId();
-		}else{
+		} else {
 			return NON_EXISTENT_ENTITY_ID;
 		}
 	}
@@ -55,5 +54,11 @@ public class RideServiceImpl implements RideService {
 	public Route getRoute(long id) {
 		return routeDao.findById(id);
 	}
-	
+
+	@Transactional
+	public Collection<Route> getAllRoutes() {
+		// TODO Auto-generated method stub
+		return routeDao.findAll();
+	}
+
 }

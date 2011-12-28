@@ -25,5 +25,8 @@ public interface RideService {
 	
 	@Transactional(readOnly=true)
 	public Route getRoute(long id);
+
+	@Transactional(readOnly=true)
+	public Collection<Route> getAllRoutes();
 	
 }
