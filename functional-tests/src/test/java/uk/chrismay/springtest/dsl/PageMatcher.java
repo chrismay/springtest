@@ -39,14 +39,15 @@ public class PageMatcher {
 		}
 	}
 
-	public void routesPage() {
+	public void createRouteForm() {
 		Assert.assertTrue("Page doesn't look like the 'Add Route' page:\n" + pageText(),
 				pageText().contains("Add Route"));
 	}
 
 	public void routeCreatedPage() {
+		hasRoutesList();
 		Assert.assertTrue("Page doesn't look like the 'Route added' page:\n" + pageText(),
-				pageText().contains("Well done"));
+				pageText().contains("Created new route"));
 
 	}
 
@@ -61,6 +62,11 @@ public class PageMatcher {
 	public void hasRoutesList() {
 		Assert.assertTrue("Page doesn't seem to contain the Routes List\n:" + pageText(), pageText().contains("ul id='routeList'"));
 	}
+	
+	public void routesListPage() {
+		hasRoutesList();
+	}
+	
 
 	public String getUrl() {
 		return page.getURL().toExternalForm();

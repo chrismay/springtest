@@ -26,7 +26,7 @@ public class MainPageTest {
 	public void canLoadCreateRoutesPageFromMainPage(){
 		Given().theApplication().isRunning();
 		When().theUser().viewsMainPage().and().clicksCreateRoutesLink();
-		Then().theCurrentPage().shouldBe().routesPage();
+		Then().theCurrentPage().shouldBe().createRouteForm();
 	}
 
 	

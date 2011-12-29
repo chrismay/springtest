@@ -13,6 +13,7 @@ public class RoutesTest {
 		When().theUser().loadsCreateNewRoutePage();
 		And().theUser().createsRoute("test route");
 		Then().theCurrentPage().shouldBe().routeCreatedPage();
+		
 	}
 	
 	@Test
@@ -23,7 +24,7 @@ public class RoutesTest {
 		And().theUser().createsRoute("test route");
 		And().theUser().loadsCreateNewRoutePage();
 		And().theUser().createsRoute("test route");
-		Then().theCurrentPage().shouldBe().routesPage();
+		Then().theCurrentPage().shouldBe().createRouteForm();
 		And().theCurrentPage().should().containText("Route with name test route already exists");		
 	}
 	
