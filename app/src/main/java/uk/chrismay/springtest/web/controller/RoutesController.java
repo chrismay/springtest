@@ -4,9 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,16 +31,18 @@ public class RoutesController {
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public String submitRouteForm(@Valid Route r, Model model, BindingResult errors,RedirectAttributes flashMap) {
+	public String submitRouteForm(@Valid Route r, BindingResult errors,RedirectAttributes flashMap) {
+		if (errors.hasErrors()){
+			return "new_route";
+		}
 		long routeId = rideService.createRoute(r.getName());
 		if (routeId != RideService.NON_EXISTENT_ENTITY_ID) {
 			Route created = rideService.getRoute(routeId);
 			flashMap.addFlashAttribute("message",String.format("Created new route with name '%s'",created.getName()));
 			return "redirect:/route/list.htm";
 		} else {
-			model.addAttribute("route", r);
-			errors.addError(new FieldError("route", "name", "Route with name "
-					+ r.getName() + " already exists"));
+			//model.addAttribute("route", r);
+			errors.rejectValue("name","route.name.duplicate", String.format("Route with name %s already exists", r.getName()));
 			return "new_route";
 		}
 

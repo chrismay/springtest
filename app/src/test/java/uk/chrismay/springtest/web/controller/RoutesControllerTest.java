@@ -9,18 +9,16 @@ import static org.mockito.Mockito.when;
 import java.util.Collection;
 
 import org.junit.Test;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
-import com.google.common.collect.ImmutableList;
-
 import uk.chrismay.springtest.domain.Route;
 import uk.chrismay.springtest.service.RideService;
+
+import com.google.common.collect.ImmutableList;
 
 public class RoutesControllerTest {
 	;
@@ -61,13 +59,13 @@ public class RoutesControllerTest {
 		when(rs.getRoute(route.getId())).thenReturn(route);
 		RoutesController controller = new RoutesController(rs);
 
-		Model model = new ExtendedModelMap();
 		RedirectAttributes flashMap = new RedirectAttributesModelMap();
-		String view = controller.submitRouteForm(route, model,new BindException(
+		String view = controller.submitRouteForm(route, new BindException(
 				route, "route"), flashMap);
 
 		assertEquals("redirect:/route/list.htm", view);
-		assertEquals("Created new route with name 'test route'",flashMap.getFlashAttributes().get("message"));
+		assertEquals("Created new route with name 'test route'", flashMap
+				.getFlashAttributes().get("message"));
 	}
 
 	@Test
@@ -79,13 +77,24 @@ public class RoutesControllerTest {
 				RideService.NON_EXISTENT_ENTITY_ID);
 		RoutesController controller = new RoutesController(rs);
 		BindingResult errors = new BindException(route, "route");
-		Model model = new ExtendedModelMap();
-		String view = controller.submitRouteForm(route, model,errors,new RedirectAttributesModelMap());
+		String view = controller.submitRouteForm(route, errors,
+				new RedirectAttributesModelMap());
 		assertEquals("new_route", view);
 		assertEquals(1, errors.getAllErrors().size());
 		assertEquals("Route with name test route already exists", errors
 				.getFieldError("name").getDefaultMessage());
-		assertEquals(route,model.asMap().get("route"));
+	}
+
+	@Test
+	public void testSubmitWithBindingErrors() {
+
+		RoutesController controller = new RoutesController(rs);
+		Route route = new Route("");
+		BindingResult errors = new BindException(route, "route");
+		errors.rejectValue("name", "someErrorCode",  "some message");
+		String view = controller.submitRouteForm(route, errors, null);
+		assertEquals("new_route", view);
+
 	}
 
 }

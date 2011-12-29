@@ -12,7 +12,17 @@ public class RoutesTest {
 		And().theDatabase().isEmptied();
 		When().theUser().loadsCreateNewRoutePage();
 		And().theUser().createsRoute("test route");
-		Then().theCurrentPage().shouldBe().routeCreatedPage();
+		Then().theCurrentPage().shouldBe().routeCreatedPage();		
+	}
+	
+	@Test
+	public void cantCreateRoutesWithBlankNames(){
+		Given().theApplication().isRunning();
+		And().theDatabase().isEmptied();
+		When().theUser().loadsCreateNewRoutePage();
+		And().theUser().createsRoute("");
+		Then().theCurrentPage().shouldBe().createRouteForm();
+		And().theCurrentPage().should().containText("may not be empty");		
 		
 	}
 	
