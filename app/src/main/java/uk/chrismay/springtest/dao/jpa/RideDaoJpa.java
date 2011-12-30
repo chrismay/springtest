@@ -18,27 +18,24 @@ public class RideDaoJpa  implements RideDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@Override
+
 	public Ride findById(long id) {
 		return  entityManager.find(Ride.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public Collection<Ride> findByRoute(Route route) {
 		Query q =  entityManager.createQuery(Ride.QUERY_FIND_BY_ROUTE);
 		q.setParameter(1, route);
 		return q.getResultList();
 	}
 
-	@Override
 	public Ride save(Ride r) {
 		entityManager.persist(r);
 		return r;
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public Collection<Ride> findAll() {
 		Query q = entityManager.createQuery(Ride.QUERY_FIND_ALL);
 		return q.getResultList();
