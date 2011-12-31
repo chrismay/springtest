@@ -39,6 +39,9 @@ public class World {
 	public RoutesList theRoutesList() {
 		return Session.current().RoutesList();
 	}
+	public API TheAPI() {
+		return new API();
+	}
 	
 	
 

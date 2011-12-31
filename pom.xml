@@ -8,6 +8,7 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>shared-model</module>
     <module>app</module>
     <module>functional-tests</module>
   </modules>

@@ -48,5 +48,12 @@ public class RouteTest extends AbstractJUnit4SpringContextTests{
 		assertEquals(0, errors.getErrorCount());
 		
 	}
+	
+	@Test
+	public void canGetAndSetId(){
+		Route r = new Route("Test");
+		r.setId(23);
+		assertEquals(23, r.getId());
+	}
 
 }

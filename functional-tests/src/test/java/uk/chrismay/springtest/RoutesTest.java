@@ -48,4 +48,13 @@ public class RoutesTest {
 		Then().theCurrentPage().hasRoutesList();
 		And().theRoutesList().includes("test route");
 	}
+	
+	@Test
+	public void listRoutesAsJSON(){
+		Given().theApplication().isRunning();
+		And().theDatabase().isEmptied();
+		When().theUser().loadsCreateNewRoutePage();
+		And().theUser().createsRoute("test route");
+		Then().TheAPI().routesList().response().shouldContainRouteNamed("test route");
+	}
 }

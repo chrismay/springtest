@@ -12,7 +12,7 @@ public class App {
 	private static final String SERVLET_PORT=System.getProperty("servlet.port","8080");
 	private static final String SERVER_URL = "http://localhost:" + SERVLET_PORT + "/";
 	private static final String CONTEXT="springtest";
-	private static final String APP_BASE_URL = SERVER_URL + CONTEXT;
+	public static final String APP_BASE_URL = SERVER_URL + CONTEXT;
 	public static final String STATUS_URL = APP_BASE_URL + "/status.htm";
 	public static final String HOME_URL = APP_BASE_URL + "/home.htm";
 	private final Session session;

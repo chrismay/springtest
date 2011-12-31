@@ -10,9 +10,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import uk.chrismay.springtest.domain.Ride;
-import uk.chrismay.springtest.domain.Route;
-
 public class RideTest {
 
 	@Test
@@ -45,6 +42,21 @@ public class RideTest {
 		Route r2 = new Route("new route");
 		ride.setRoute(r2);
 		Assert.assertEquals(r2, ride.getRoute());
+	}
+	
+	
+	@Test
+	public void canGetAndSetId(){
+		Ride r = new Ride(null);
+		r.setId(12);
+		assertEquals(12, r.getId());
+	}
+
+	@Test
+	public void canGetAndSetComments(){
+		Ride r = new Ride(null);
+		r.setComments("Some comments");
+		assertEquals("Some comments", r.getComments());
 	}
 	
 	
