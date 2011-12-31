@@ -45,8 +45,8 @@ public class RideDaoHsqlTest extends
 	
 	@Test
 	public void testSaveSetsId(){
-		Route route = new Route("not used elsewhere");
-		Ride r = new Ride(route);
+		Route otherRoute = new Route("not used elsewhere");
+		Ride r = new Ride(otherRoute);
 		Ride saved = rideDao.save(r);
 		assertTrue(saved.getId() > 0);
 		assertTrue(saved.getRoute().getId() > 0);	

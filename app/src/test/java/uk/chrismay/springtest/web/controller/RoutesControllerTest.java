@@ -23,7 +23,6 @@ import uk.chrismay.springtest.service.RideService;
 import com.google.common.collect.ImmutableList;
 
 public class RoutesControllerTest {
-	;
 
 	private RideService rs = mock(RideService.class);
 
@@ -45,22 +44,22 @@ public class RoutesControllerTest {
 		RoutesController controller = new RoutesController(rs);
 		Model m = new ExtendedModelMap();
 		controller.newRouteForm(m);
-		assertNotNull(m.asMap().get("route"));
-		assertTrue(m.asMap().get("route") instanceof Route);
+		assertNotNull(m.asMap().get(RoutesController.ROUTE_KEY));
+		assertTrue(m.asMap().get(RoutesController.ROUTE_KEY) instanceof Route);
 	}
 
 	@Test
 	public void testSubmitNewRouteForm() {
 		final String testRouteName = "test route";
 		Route route = new Route(testRouteName);
-		route.setId(99);
+		route.setId(1);
 
 		when(rs.createRoute(testRouteName)).thenReturn(route.getId());
 		when(rs.getRoute(route.getId())).thenReturn(route);
 		RoutesController controller = new RoutesController(rs);
 
 		RedirectAttributes flashMap = new RedirectAttributesModelMap();
-		String view = controller.submitRouteForm(route, new BindException(route, "route"), flashMap);
+		String view = controller.submitRouteForm(route, new BindException(route, RoutesController.ROUTE_KEY), flashMap);
 
 		assertEquals("redirect:/route/list.htm", view);
 		assertEquals("Created new route with name 'test route'", flashMap.getFlashAttributes().get("message"));
@@ -73,7 +72,7 @@ public class RoutesControllerTest {
 
 		when(rs.createRoute(testRouteName)).thenReturn(RideService.NON_EXISTENT_ENTITY_ID);
 		RoutesController controller = new RoutesController(rs);
-		BindingResult errors = new BindException(route, "route");
+		BindingResult errors = new BindException(route, RoutesController.ROUTE_KEY);
 		String view = controller.submitRouteForm(route, errors, new RedirectAttributesModelMap());
 		assertNull(view);
 		assertEquals(1, errors.getAllErrors().size());
@@ -85,7 +84,7 @@ public class RoutesControllerTest {
 
 		RoutesController controller = new RoutesController(rs);
 		Route route = new Route("");
-		BindingResult errors = new BindException(route, "route");
+		BindingResult errors = new BindException(route, RoutesController.ROUTE_KEY);
 		errors.rejectValue("name", "someErrorCode", "some message");
 		String view = controller.submitRouteForm(route, errors, null);
 		assertNull(view);

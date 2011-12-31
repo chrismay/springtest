@@ -1,16 +1,13 @@
 package uk.chrismay.springtest.web.controller;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
-import org.springframework.web.servlet.ModelAndView;
 
 public class MainPageControllerTest {
 
+    //All of the Main Page controller behaviour is configured by annotations
 	@Test
-	public void testViewName(){
+	public void testGetDoesNothing(){
 		MainPageController mpc = new MainPageController();
-		ModelAndView mav = mpc.get();
-		Assert.assertEquals("home",mav.getViewName());
+		mpc.get();
 	}
 }

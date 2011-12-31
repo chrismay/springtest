@@ -17,6 +17,8 @@ import uk.chrismay.springtest.domain.Route;
 @ContextConfiguration(locations = { "/hsql-tests.xml","/spring-persistence.xml" })
 public class RouteDaoJpaTest extends AbstractTransactionalJUnit4SpringContextTests{
 
+	private static final int NON_EXISTENT_ROUTE_ID = 99;
+	private static final String TEST_ROUTE_NAME = "test1";
 	@Autowired
 	private RouteDao routeDao;
 
@@ -29,7 +31,7 @@ public class RouteDaoJpaTest extends AbstractTransactionalJUnit4SpringContextTes
 	
 	@Test
 	public void findByNameReturnsEmptySetWhenNoMatch(){
-		routeDao.save(new Route("test1"));
+		routeDao.save(new Route(TEST_ROUTE_NAME));
 		routeDao.save(new Route("test2"));
 		
 		Collection<Route> matches = routeDao.findByName("nothing");
@@ -38,31 +40,31 @@ public class RouteDaoJpaTest extends AbstractTransactionalJUnit4SpringContextTes
 	
 	@Test
 	public void findByNameReturnsMatchingRoute(){
-		routeDao.save(new Route("test1"));
+		routeDao.save(new Route(TEST_ROUTE_NAME));
 		routeDao.save(new Route("test2"));
 		
-		Collection<Route> matches = routeDao.findByName("test1");
+		Collection<Route> matches = routeDao.findByName(TEST_ROUTE_NAME);
 		assertEquals(1, matches.size());
-		assertEquals("test1",matches.iterator().next().getName());
+		assertEquals(TEST_ROUTE_NAME,matches.iterator().next().getName());
 	}
 	
 	@Test
 	public void findByIdWorks(){
-		Route route = routeDao.save(new Route("test1"));
+		Route route = routeDao.save(new Route(TEST_ROUTE_NAME));
 		Route sameRoute = routeDao.findById(route.getId());
 		assertEquals(route, sameRoute);
 	}
 	
 	@Test
 	public void findByIDWhenMissing(){
-		Route r = routeDao.findById(99);
+		Route r = routeDao.findById(NON_EXISTENT_ROUTE_ID);
 		assertNull(r);
 	}
 	
 	@Test
 	public void findAll(){
 		assertTrue(routeDao.findAll().isEmpty());
-		routeDao.save(new Route("test1"));
+		routeDao.save(new Route(TEST_ROUTE_NAME));
 		routeDao.save(new Route("test2"));
 		Collection<Route> all = routeDao.findAll();
 		assertEquals(2, all.size());

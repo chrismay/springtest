@@ -21,6 +21,7 @@ import uk.chrismay.springtest.service.RideService;
 public class RoutesController {
 
 	private final RideService rideService;
+	public static final String ROUTE_KEY = "route";
 
 	@Autowired
 	public RoutesController(RideService rs) {
@@ -29,7 +30,7 @@ public class RoutesController {
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public void newRouteForm(Model model) {
-		model.addAttribute("route", new Route());
+		model.addAttribute(ROUTE_KEY, new Route());
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
@@ -63,7 +64,7 @@ public class RoutesController {
 	 * JSON Request handler
 	 */
 	@RequestMapping(value="/list",  headers="Accept=application/json")
-	public @ResponseBody Collection<Route> getAllRoutes(){
+	@ResponseBody public  Collection<Route> getAllRoutes(){
 		return rideService.getAllRoutes();
 	}
 

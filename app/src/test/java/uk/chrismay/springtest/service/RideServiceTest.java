@@ -23,7 +23,9 @@ import com.google.common.collect.ImmutableList;
 
 public class RideServiceTest {
 
-	private final Route testRoute = new Route("test");
+	private static final int TEST_ROUTE_ID = 99;
+	private static final String TEST_ROUTE_NAME = "test";
+	private final Route testRoute = new Route(TEST_ROUTE_NAME);
 	private final Ride r = new Ride(testRoute);
 	private final Ride r2 = new Ride(testRoute);
 	private final RideDao rideDao = mock(RideDao.class);
@@ -34,7 +36,7 @@ public class RideServiceTest {
 	@Test
 	public void createRideUsesSuppliedRoute(){
 
-		r2.setId(99);
+		r2.setId(TEST_ROUTE_ID);
 		when(rideDao.save(argThat(isRideWithTestRoute()))).thenReturn(r2);
 		long id = service.createRide(new Ride(testRoute));
 		assertEquals(r2.getId(), id);
@@ -43,18 +45,18 @@ public class RideServiceTest {
 	
 	@Test
 	public void createRouteUsesSuppliedName(){
-		Route r = new Route("test");
-		r.setId(22);
-		when(routeDao.save(argThat(isTestRoute()))).thenReturn(r);
-		long newRouteId = service.createRoute("test");
-		assertEquals(r.getId(), newRouteId);
+		Route newRoute = new Route(TEST_ROUTE_NAME);
+		newRoute.setId(TEST_ROUTE_ID);
+		when(routeDao.save(argThat(isTestRoute()))).thenReturn(newRoute);
+		long newRouteId = service.createRoute(TEST_ROUTE_NAME);
+		assertEquals(newRoute.getId(), newRouteId);
 	}
 	
 	@Test
 	public void cantCreateDuplicateNamedRoutes(){
-		Route r = new Route("test");
-		when(routeDao.findByName("test")).thenReturn(ImmutableList.of(r));
-		long id = service.createRoute("test");
+		Route newRoute = new Route(TEST_ROUTE_NAME);
+		when(routeDao.findByName(TEST_ROUTE_NAME)).thenReturn(ImmutableList.of(newRoute));
+		long id = service.createRoute(TEST_ROUTE_NAME);
 		Assert.assertEquals(RideService.NON_EXISTENT_ENTITY_ID, id);
 	}	
 	
@@ -80,7 +82,7 @@ public class RideServiceTest {
 	
 	@Test
 	public void getRideThatExists(){
-		r2.setId(99);
+		r2.setId(TEST_ROUTE_ID);
 		when(rideDao.findById(r2.getId())).thenReturn(r2);
 		Ride found = service.getRide(r2.getId());
 		assertEquals(r2,found);
@@ -88,14 +90,14 @@ public class RideServiceTest {
 	
 	@Test
 	public void getRideThatDoesNotExist(){
-		when(rideDao.findById(99)).thenReturn(null);
-		Ride notFound = service.getRide(99);
+		when(rideDao.findById(TEST_ROUTE_ID)).thenReturn(null);
+		Ride notFound = service.getRide(TEST_ROUTE_ID);
 		assertNull(notFound);
 	}
 	
 	@Test
 	public void getRouteThatExists(){
-		testRoute.setId(99);
+		testRoute.setId(TEST_ROUTE_ID);
 		when(routeDao.findById(testRoute.getId())).thenReturn(testRoute);
 		Route found = service.getRoute(testRoute.getId());
 		assertEquals(testRoute,found);
@@ -103,8 +105,8 @@ public class RideServiceTest {
 	
 	@Test
 	public void getRouteThatDoesNotExist(){
-		when(routeDao.findById(99)).thenReturn(null);
-		Route notFound = service.getRoute(99);
+		when(routeDao.findById(TEST_ROUTE_ID)).thenReturn(null);
+		Route notFound = service.getRoute(TEST_ROUTE_ID);
 		assertNull(notFound);
 	}
 	
@@ -119,14 +121,14 @@ public class RideServiceTest {
 	class IsTestRoute extends ArgumentMatcher<Route>{
 		@Override
 		public boolean matches(Object argument) {
-			return ((Route)argument).getName().equals("test");
+			return ((Route)argument).getName().equals(TEST_ROUTE_NAME);
 		}
 		
 	}
 	class IsRideWithTestRoute extends ArgumentMatcher<Ride>{
 		@Override
 		public boolean matches(Object argument) {
-			return ((Ride) argument).getRoute().getName().equals("test");	
+			return ((Ride) argument).getRoute().getName().equals(TEST_ROUTE_NAME);	
 		}
 		
 	}
