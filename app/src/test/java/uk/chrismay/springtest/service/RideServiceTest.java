@@ -36,7 +36,7 @@ public class RideServiceTest {
 
 		r2.setId(99);
 		when(rideDao.save(argThat(isRideWithTestRoute()))).thenReturn(r2);
-		long id = service.createRide(testRoute);
+		long id = service.createRide(new Ride(testRoute));
 		assertEquals(r2.getId(), id);
 		verify(rideDao).save(argThat(isRideWithTestRoute()));
 	}

@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.xml.sax.SAXException;
 
 import com.meterware.httpunit.WebConversation;
+import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 
 public class WebConversationWrapper {
@@ -29,5 +30,16 @@ public class WebConversationWrapper {
 		}catch (RuntimeException e){
 			return null;
 		}
+	}
+
+	public WebResponse getResponse(WebRequest req) {
+			try {
+				return _conversation.getResponse(req);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			} catch (SAXException e) {
+				throw new RuntimeException(e);
+			}
+
 	}
 }

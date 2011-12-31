@@ -64,4 +64,11 @@ public class Ride {
 	public void setRoute(Route route) {
 		this.route = route;
 	}
+
+	public void updateFrom(Ride newData) {
+		route = newData.route;
+		comments = newData.comments;
+		date = newData.date;
+		
+	}
 }

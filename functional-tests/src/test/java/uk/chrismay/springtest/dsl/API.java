@@ -7,4 +7,9 @@ public class API {
 		
 	}
 
+	public void createsRide(String rideName, String routeName) {
+		 new RidesApi().create(rideName,routeName);
+		
+	}
+
 }

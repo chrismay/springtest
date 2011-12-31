@@ -24,9 +24,8 @@ public class RideServiceImpl implements RideService {
 	}
 
 	@Transactional
-	public long createRide(Route route) {
-		Ride r = new Ride(route);
-		return rideDao.save(r).getId();
+	public long createRide(Ride ride) {
+		return rideDao.save(ride).getId();
 	}
 
 	@Transactional

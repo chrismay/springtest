@@ -12,7 +12,7 @@ public interface RideService {
 	public final static long NON_EXISTENT_ENTITY_ID=-1;
 
 	@Transactional
-	public long createRide(Route route);
+	public long createRide(Ride r);
 	
 	@Transactional
 	public long createRoute(String name);

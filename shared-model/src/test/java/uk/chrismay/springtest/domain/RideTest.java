@@ -59,5 +59,23 @@ public class RideTest {
 		assertEquals("Some comments", r.getComments());
 	}
 	
+	@Test
+	public void acceptUpdateMergesFields(){
+		Ride original = new Ride(null);
+		original.setId(2);
+		
+		Ride newData = new Ride(new Route("test route"));
+		newData.setComments("new comments");
+		newData.setDate(new Date(0));
+		newData.setId(9);
+		
+		original.updateFrom(newData);
+		assertEquals(newData.getComments(), original.getComments());
+		assertEquals(newData.getDate(), original.getDate());
+		assertEquals(newData.getRoute(), original.getRoute());
+		// ID is never changed 
+		assertEquals(2, original.getId());
+	}
+	
 	
 }
