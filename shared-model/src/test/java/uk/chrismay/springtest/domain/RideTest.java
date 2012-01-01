@@ -2,6 +2,8 @@ package uk.chrismay.springtest.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -75,6 +77,15 @@ public class RideTest {
 		assertEquals(newData.getRoute(), original.getRoute());
 		// ID is never changed 
 		assertEquals(2, original.getId());
+	}
+	
+	@Test
+	public void hasNoArgConstructor(){
+		Ride r = new Ride();
+		assertNotNull(r);
+		assertNull(r.getDate());
+		assertNull(r.getRoute());
+		assertNull(r.getComments());
 	}
 	
 	

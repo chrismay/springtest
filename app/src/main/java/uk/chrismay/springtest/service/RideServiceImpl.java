@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import uk.chrismay.springtest.dao.RideDao;
 import uk.chrismay.springtest.dao.RouteDao;
@@ -23,17 +22,16 @@ public class RideServiceImpl implements RideService {
 		this.routeDao = routeDao;
 	}
 
-	@Transactional
 	public long createRide(Ride ride) {
+		Route persistentRoute = routeDao.findById(ride.getRoute().getId());
+		ride.setRoute(persistentRoute);
 		return rideDao.save(ride).getId();
 	}
 
-	@Transactional
 	public Collection<Ride> getAllRides() {
 		return rideDao.findAll();
 	}
 
-	@Transactional
 	public long createRoute(String name) {
 		Collection<Route> preExisting = routeDao.findByName(name);
 		if (preExisting.isEmpty()) {
@@ -44,19 +42,15 @@ public class RideServiceImpl implements RideService {
 		}
 	}
 
-	@Transactional
 	public Ride getRide(long id) {
 		return rideDao.findById(id);
 	}
 
-	@Transactional
 	public Route getRoute(long id) {
 		return routeDao.findById(id);
 	}
 
-	@Transactional
 	public Collection<Route> getAllRoutes() {
-		// TODO Auto-generated method stub
 		return routeDao.findAll();
 	}
 

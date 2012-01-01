@@ -7,26 +7,23 @@ import org.springframework.transaction.annotation.Transactional;
 import uk.chrismay.springtest.domain.Ride;
 import uk.chrismay.springtest.domain.Route;
 
+@Transactional(readOnly=true)
 public interface RideService {
 
 	long NON_EXISTENT_ENTITY_ID = -1;
 
-	@Transactional
+	@Transactional(readOnly = false)
 	long createRide(Ride r);
 
-	@Transactional
+	@Transactional(readOnly = false)
 	long createRoute(String name);
 
-	@Transactional(readOnly = true)
 	Collection<Ride> getAllRides();
 
-	@Transactional(readOnly = true)
 	Ride getRide(long id);
 
-	@Transactional(readOnly = true)
 	Route getRoute(long id);
 
-	@Transactional(readOnly = true)
 	Collection<Route> getAllRoutes();
 
 }

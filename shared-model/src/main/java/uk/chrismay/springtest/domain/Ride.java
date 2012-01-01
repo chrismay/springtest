@@ -21,6 +21,10 @@ public class Ride {
 		this.route = route;	
 	}
 	
+	// default constructor for Jackson/Hibernate
+	public Ride(){
+	}
+	
 	@Id
 	@GeneratedValue
 	private long id;
@@ -37,6 +41,9 @@ public class Ride {
 	private Date date;
 	
 	public java.util.Date getDate() {
+		if (this.date == null){
+			return null;
+		}
 		return new java.util.Date(this.date.getTime());
 	}
 

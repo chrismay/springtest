@@ -13,4 +13,13 @@ public class RideApiTest {
 		When().theUser().createsRoute("test route");
 		And().TheAPI().createsRide("test ride","test route");
 	}
+	
+	@Test
+	public void canListRides(){
+		Given().theApplication().isRunning();
+		And().theDatabase().isEmptied();
+		And().theUser().createsRoute("test route");
+		And().TheAPI().createsRide("test ride","test route");
+		Then().TheAPI().listRides().shouldContainRide("test ride");
+	}
 }

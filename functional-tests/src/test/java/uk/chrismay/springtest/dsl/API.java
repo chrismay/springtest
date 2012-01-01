@@ -12,4 +12,9 @@ public class API {
 		
 	}
 
+	public JsonAPIResponse listRides() {
+		// TODO Auto-generated method stub
+		return new RidesApi().list();
+	}
+
 }

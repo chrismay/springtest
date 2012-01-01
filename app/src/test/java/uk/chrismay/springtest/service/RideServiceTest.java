@@ -37,8 +37,11 @@ public class RideServiceTest {
 	public void createRideUsesSuppliedRoute(){
 
 		r2.setId(TEST_ROUTE_ID);
+		when(routeDao.findById(TEST_ROUTE_ID)).thenReturn(testRoute);
 		when(rideDao.save(argThat(isRideWithTestRoute()))).thenReturn(r2);
-		long id = service.createRide(new Ride(testRoute));
+		Route transientRoute = new Route(testRoute.getName());
+		transientRoute.setId(TEST_ROUTE_ID);
+		long id = service.createRide(new Ride(transientRoute));
 		assertEquals(r2.getId(), id);
 		verify(rideDao).save(argThat(isRideWithTestRoute()));
 	}

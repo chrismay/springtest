@@ -55,7 +55,7 @@ public class RoutesController {
 	/**
 	 * HTML request handler
 	 */
-	@RequestMapping(value = "/list",  headers="Accept=text/html")
+	@RequestMapping(value = "/list",  produces="text/html")
 	public void listRoutes(Model model) {
 		model.addAttribute("routes", getAllRoutes());
 	}
@@ -63,7 +63,7 @@ public class RoutesController {
 	/**
 	 * JSON Request handler
 	 */
-	@RequestMapping(value="/list",  headers="Accept=application/json")
+	@RequestMapping(value="/list",  produces="application/json")
 	@ResponseBody public  Collection<Route> getAllRoutes(){
 		return rideService.getAllRoutes();
 	}
