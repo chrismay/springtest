@@ -88,5 +88,18 @@ public class RideTest {
 		assertNull(r.getComments());
 	}
 	
+	@Test
+	public void ToStringWorksWithNulls(){
+		Ride r = new Ride();
+		r.setDate(new Date(0));
+		assertEquals("Ride: Route <NONE>, Date 1970-01-01, Comments null",r.toString() );
+	
+		Ride r2 = new Ride(new Route("test"));
+		r2.setComments("comment");
+		r2.setDate(new Date(0));
+		assertEquals("Ride: Route test, Date 1970-01-01, Comments comment",r2.toString() );
+		
+	}
+	
 	
 }

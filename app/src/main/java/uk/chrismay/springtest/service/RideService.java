@@ -18,7 +18,7 @@ public interface RideService {
 	@Transactional(readOnly = false)
 	long createRoute(String name);
 
-	Collection<Ride> getAllRides();
+	Iterable<Ride> getAllRides();
 
 	Ride getRide(long id);
 

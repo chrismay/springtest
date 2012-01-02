@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import static junit.framework.Assert.*;
 import uk.chrismay.springtest.domain.Ride;
@@ -33,7 +34,7 @@ public class RideControllerTest {
 		RideService rideService = mock(RideService.class);
 		when(rideService.getAllRides()).thenReturn(ImmutableList.of(r));
 		RideController rc = new RideController(rideService);
-		Collection<Ride> rides = rc.getAllRides();
+		Collection<Ride> rides = Lists.newArrayList(rc.getAllRides());
 		assertEquals(1, rides.size());
 		assertEquals(r, rides.iterator().next());
 	}

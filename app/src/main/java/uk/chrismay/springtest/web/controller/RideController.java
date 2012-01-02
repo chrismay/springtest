@@ -1,7 +1,5 @@
 package uk.chrismay.springtest.web.controller;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +29,7 @@ public class RideController {
 	}
 	
 	@RequestMapping(value="/list",  produces="application/json")
-	@ResponseBody public  Collection<Ride> getAllRides(){
+	@ResponseBody public  Iterable<Ride> getAllRides(){
 		return rideService.getAllRides();
 	}
 

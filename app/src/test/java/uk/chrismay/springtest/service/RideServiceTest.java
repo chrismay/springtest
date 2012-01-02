@@ -20,10 +20,11 @@ import uk.chrismay.springtest.domain.Ride;
 import uk.chrismay.springtest.domain.Route;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 public class RideServiceTest {
 
-	private static final int TEST_ROUTE_ID = 99;
+	private static final long TEST_ROUTE_ID = 99;
 	private static final String TEST_ROUTE_NAME = "test";
 	private final Route testRoute = new Route(TEST_ROUTE_NAME);
 	private final Ride r = new Ride(testRoute);
@@ -68,7 +69,7 @@ public class RideServiceTest {
 		List<Ride> allRides = ImmutableList.of(r,r2);
 		when(rideDao.findAll()).thenReturn(allRides);
 		
-		Collection<Ride> all =  service.getAllRides();
+		Collection<Ride> all =  Lists.newArrayList(service.getAllRides());
 		assertEquals(2, all.size());
 		assertTrue(all.contains(r));
 		assertTrue(all.contains(r2));
@@ -86,14 +87,14 @@ public class RideServiceTest {
 	@Test
 	public void getRideThatExists(){
 		r2.setId(TEST_ROUTE_ID);
-		when(rideDao.findById(r2.getId())).thenReturn(r2);
+		when(rideDao.findOne(r2.getId())).thenReturn(r2);
 		Ride found = service.getRide(r2.getId());
 		assertEquals(r2,found);
 	}
 	
 	@Test
 	public void getRideThatDoesNotExist(){
-		when(rideDao.findById(TEST_ROUTE_ID)).thenReturn(null);
+		when(rideDao.findOne(TEST_ROUTE_ID)).thenReturn(null);
 		Ride notFound = service.getRide(TEST_ROUTE_ID);
 		assertNull(notFound);
 	}

@@ -28,7 +28,7 @@ public class RideServiceImpl implements RideService {
 		return rideDao.save(ride).getId();
 	}
 
-	public Collection<Ride> getAllRides() {
+	public Iterable<Ride> getAllRides() {
 		return rideDao.findAll();
 	}
 
@@ -43,7 +43,7 @@ public class RideServiceImpl implements RideService {
 	}
 
 	public Ride getRide(long id) {
-		return rideDao.findById(id);
+		return rideDao.findOne(id);
 	}
 
 	public Route getRoute(long id) {

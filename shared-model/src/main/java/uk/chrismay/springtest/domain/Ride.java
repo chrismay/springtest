@@ -78,4 +78,14 @@ public class Ride {
 		date = newData.date;
 		
 	}
+	@Override
+	public String toString(){
+		String routeName;
+		if (route == null){
+			routeName = "<NONE>";
+		}else{
+			routeName = route.getName();
+		}
+		return String.format("Ride: Route %s, Date %s, Comments %s",routeName, date,comments);
+	}
 }

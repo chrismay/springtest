@@ -22,6 +22,14 @@ var reloadRides = function(){
 <h1>Rides</h1>
 <div id="ridesList">
 </div>
+<h2>New Ride</h2>
+<form>
+<input type="text" name="comments"/>
+<br/>
+<input type="submit"/>
+</form>
+<div id="debug">
+</div>
 <script type="text/javascript">
 reloadRides();
 </script>
