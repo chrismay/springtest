@@ -37,4 +37,10 @@ public class RideControllerTest {
 		assertEquals(1, rides.size());
 		assertEquals(r, rides.iterator().next());
 	}
+	
+	@Test
+	public void testListDoesNothing(){
+		RideController rc= new RideController(null);
+		rc.list();
+	}
 }

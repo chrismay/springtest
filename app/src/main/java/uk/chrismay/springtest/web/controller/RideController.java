@@ -35,4 +35,8 @@ public class RideController {
 		return rideService.getAllRides();
 	}
 
+	@RequestMapping(value="/list",  produces="text/html")
+	public  void list(){
+	}
+
 }
