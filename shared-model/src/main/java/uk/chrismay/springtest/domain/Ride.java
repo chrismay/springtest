@@ -13,9 +13,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Ride {
 
-	public static final String QUERY_FIND_BY_ROUTE = "from Ride r where r.route = ?";
-	public static final String QUERY_FIND_ALL = "from Ride";
-
 	public Ride(Route route){
 		this.date = new Date(new java.util.Date().getTime());
 		this.route = route;	

@@ -1,7 +1,5 @@
 package uk.chrismay.springtest.web.controller;
 
-import java.util.Collection;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +62,7 @@ public class RoutesController {
 	 * JSON Request handler
 	 */
 	@RequestMapping(value="/list",  produces="application/json")
-	@ResponseBody public  Collection<Route> getAllRoutes(){
+	@ResponseBody public  Iterable<Route> getAllRoutes(){
 		return rideService.getAllRoutes();
 	}
 

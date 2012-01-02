@@ -38,7 +38,7 @@ public class RideServiceTest {
 	public void createRideUsesSuppliedRoute(){
 
 		r2.setId(TEST_ROUTE_ID);
-		when(routeDao.findById(TEST_ROUTE_ID)).thenReturn(testRoute);
+		when(routeDao.findOne(TEST_ROUTE_ID)).thenReturn(testRoute);
 		when(rideDao.save(argThat(isRideWithTestRoute()))).thenReturn(r2);
 		Route transientRoute = new Route(testRoute.getName());
 		transientRoute.setId(TEST_ROUTE_ID);
@@ -79,7 +79,7 @@ public class RideServiceTest {
 	public void getAllRoutesGetsAll(){
 		List<Route> allRoutes = ImmutableList.of(testRoute);
 		when(routeDao.findAll()).thenReturn(allRoutes);
-		Collection<Route> all = service.getAllRoutes();
+		Collection<Route> all = Lists.newArrayList(service.getAllRoutes());
 		assertEquals(1, all.size());
 		assertTrue(all.contains(testRoute));
 	}
@@ -102,14 +102,14 @@ public class RideServiceTest {
 	@Test
 	public void getRouteThatExists(){
 		testRoute.setId(TEST_ROUTE_ID);
-		when(routeDao.findById(testRoute.getId())).thenReturn(testRoute);
+		when(routeDao.findOne(testRoute.getId())).thenReturn(testRoute);
 		Route found = service.getRoute(testRoute.getId());
 		assertEquals(testRoute,found);
 	}
 	
 	@Test
 	public void getRouteThatDoesNotExist(){
-		when(routeDao.findById(TEST_ROUTE_ID)).thenReturn(null);
+		when(routeDao.findOne(TEST_ROUTE_ID)).thenReturn(null);
 		Route notFound = service.getRoute(TEST_ROUTE_ID);
 		assertNull(notFound);
 	}

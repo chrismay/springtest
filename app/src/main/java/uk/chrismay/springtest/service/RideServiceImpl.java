@@ -23,7 +23,7 @@ public class RideServiceImpl implements RideService {
 	}
 
 	public long createRide(Ride ride) {
-		Route persistentRoute = routeDao.findById(ride.getRoute().getId());
+		Route persistentRoute = routeDao.findOne(ride.getRoute().getId());
 		ride.setRoute(persistentRoute);
 		return rideDao.save(ride).getId();
 	}
@@ -47,10 +47,10 @@ public class RideServiceImpl implements RideService {
 	}
 
 	public Route getRoute(long id) {
-		return routeDao.findById(id);
+		return routeDao.findOne(id);
 	}
 
-	public Collection<Route> getAllRoutes() {
+	public Iterable<Route> getAllRoutes() {
 		return routeDao.findAll();
 	}
 

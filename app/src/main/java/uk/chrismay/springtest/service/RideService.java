@@ -1,7 +1,5 @@
 package uk.chrismay.springtest.service;
 
-import java.util.Collection;
-
 import org.springframework.transaction.annotation.Transactional;
 
 import uk.chrismay.springtest.domain.Ride;
@@ -24,6 +22,6 @@ public interface RideService {
 
 	Route getRoute(long id);
 
-	Collection<Route> getAllRoutes();
+	Iterable<Route> getAllRoutes();
 
 }

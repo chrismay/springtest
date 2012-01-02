@@ -1,13 +1,12 @@
 package uk.chrismay.springtest.dao;
 
-import java.util.Collection;
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
 
 import uk.chrismay.springtest.domain.Route;
 
-public interface RouteDao {
+public interface RouteDao extends CrudRepository<Route,Long> {
 
-	Route save(Route r);
-	Collection<Route> findByName(String name);
-	Route findById(long id);
-	Collection<Route> findAll();
+	List<Route> findByName(String name);
 }

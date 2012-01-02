@@ -31,7 +31,7 @@ public class App {
 				WebResponse res = session
 						.getResponse(STATUS_URL);
 				try {
-					return (res.getText().startsWith("\nok"));
+					return (res.getText().startsWith("ok"));
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
