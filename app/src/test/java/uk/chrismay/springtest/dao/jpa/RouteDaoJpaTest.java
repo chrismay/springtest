@@ -13,10 +13,11 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 
 import com.google.common.collect.Lists;
 
+import uk.chrismay.springtest.config.root.PersistenceConfiguration;
 import uk.chrismay.springtest.dao.RouteDao;
 import uk.chrismay.springtest.domain.Route;
 
-@ContextConfiguration(locations = { "/hsql-tests.xml","/spring-persistence.xml" })
+@ContextConfiguration(classes ={HsqlTestConfiguration.class,PersistenceConfiguration.class})
 public class RouteDaoJpaTest extends AbstractTransactionalJUnit4SpringContextTests{
 
 	private static final long NON_EXISTENT_ROUTE_ID = 99;

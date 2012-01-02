@@ -18,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.transaction.annotation.Transactional;
 
+import uk.chrismay.springtest.config.root.PersistenceConfiguration;
 import uk.chrismay.springtest.dao.RideDao;
 import uk.chrismay.springtest.dao.RouteDao;
 import uk.chrismay.springtest.domain.Ride;
@@ -25,7 +26,7 @@ import uk.chrismay.springtest.domain.Route;
 
 import com.google.common.collect.Lists;
 
-@ContextConfiguration(locations = { "/hsql-tests.xml","/spring-persistence.xml" })
+@ContextConfiguration(classes ={HsqlTestConfiguration.class,PersistenceConfiguration.class})
 @Transactional
 public class RideDaoHsqlTest extends
 		AbstractTransactionalJUnit4SpringContextTests {
